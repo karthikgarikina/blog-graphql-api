@@ -57,6 +57,11 @@ export const Mutation = {
 
   async createComment(_, { input }, context) {
     if (!context.user) throw new AuthenticationError();
+    
+    // Check if post exists
+    const post = await findPostById(input.postId);
+    if (!post) throw new NotFoundError('Post not found');
+    
     const comment = await createComment(input, context.user.sub);
 
     if (context.pubsub) {
