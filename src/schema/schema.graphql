@@ -37,6 +37,7 @@ type Mutation {
   updatePost(id: ID!, input: UpdatePostInput!): Post!
   deletePost(id: ID!): Boolean!
   createComment(input: CreateCommentInput!): Comment!
+  login(username: String!): AuthPayload!
 }
 
 type Subscription {
@@ -95,3 +96,9 @@ type CommentConnection {
   edges: [CommentEdge!]!
   pageInfo: PageInfo!
 }
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
